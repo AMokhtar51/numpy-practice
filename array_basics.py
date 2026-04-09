@@ -95,14 +95,66 @@ import numpy as np
 
 # print(a.min(axis=0))  # -> min of each col
 
-# * execrises
-scores = np.array([[85, 90, 78], [92, 88, 95], [70, 65, 80], [88, 92, 85]])
+# # * execrises
+# scores = np.array([[85, 90, 78], [92, 88, 95], [70, 65, 80], [88, 92, 85]])
 
-print(scores.max(axis=1))  # 1. highest score each student
-print(scores.mean(axis=0))  # 2. avg score per subject
-print(scores[scores > 85])  # 3. all scoresa above 85
-print(np.nonzero(scores > 85))  # 4. indices of scores above 85
-print(scores[0:2,]) # 5. scores of the first 2 students 
-print(scores[:, 2]) # 6. scores of all students in last subject
-print(scores[0:2, 1:3]) # 7. top-right 2x2 subgrid
-print(scores[:, ::2]) # 8. every other student score (0, 2, 4, ..)
+# print(scores.max(axis=1))  # 1. highest score each student
+# print(scores.mean(axis=0))  # 2. avg score per subject
+# print(scores[scores > 85])  # 3. all scoresa above 85
+# print(np.nonzero(scores > 85))  # 4. indices of scores above 85
+# print(scores[0:2,]) # 5. scores of the first 2 students
+# print(scores[:, 2]) # 6. scores of all students in last subject
+# print(scores[0:2, 1:3]) # 7. top-right 2x2 subgrid
+# print(scores[::2]) # 8. every other student score (0, 2, 4, ..)
+
+# # * generation random numbers
+# rng = np.random.default_rng()
+# print(rng.integers(5, size=(2,4)))
+
+# # * shape manipulation
+# a = np.array([[3., 7., 3., 4.], [1., 4., 2., 2.],[7., 2., 4., 9.]])
+# print(a.ravel()) # -> array, flattend
+# print(a.reshape(6, 2)) # -> returns the modifed shape
+# print(a.T) # -> transposed
+# # a.resize((2,6)) # -> modifies the array itself
+# print(a.reshape(5, -1))
+
+# * stacking and splitting
+# a = np.array([4,2, 4, 5, 6, 7])
+# b = np.array([3,8, 5 ,6, 8 , 10])
+
+# print(np.vstack((a,b))) # -> combining datasets (add more samples)
+# print(np.hstack((a,b))) # -> combining features (add more cols)
+
+# c = np.vstack((a,b))
+# print(np.hsplit(c, 3)) # -> splitting data into batches or train/test
+# print(np.vsplit(c, 2))
+
+# # * copy and views
+# a = np.array([[ 0,  1,  2,  3],
+#               [ 4,  5,  6,  7],
+#               [ 8,  9, 10, 11]])
+# b = a
+# print(b is a) # -> no new object just a and b are 2 names for same ndarray object
+
+# c = a.view() # -> new array object, same data. changing view changes original
+# print(c is a)
+# c = c.reshape((2,6)) # -> independent shapes,just looks at the same data differently
+# print(a.shape)
+
+# d = a.copy() # -> new array object with the new data
+# d[0,0] = 999 # wont change
+# print(a)
+# a = np.arange(int(1e8))
+# # slicing returns a view, so a wont get deleted if you dont copy since b points to a's data
+# del a
+# b = a[:100].copy()
+# print(b)
+
+# * indexing with arrays of indices
+a = np.arange(12) ** 2
+i = np.array([1, 1, 3, 8, 5])
+print(a[i])
+
+j = np.array([[3, 4], [9, 7]])
+print(a[j])
